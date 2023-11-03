@@ -5,9 +5,16 @@
 
     <insert id="insertBatch">
         insert into dish_flavor(dish_id,name,value)
-         values 
-             <foreach collection="flavors" item="df" separator=",">
-                 (#{df.dishId},#{df.name},#{df.value})
-             </foreach>
+        values
+        <foreach collection="flavors" item="df" separator=",">
+            (#{df.dishId},#{df.name},#{df.value})
+        </foreach>
     </insert>
+    <delete id="deleteByDishIds">
+        delete from dish_flovor where dish_id in
+        <foreach collection="ids" item="dishId" open="(" close=")" separator=",">
+            #{dishId}
+        </foreach>
+    </delete>
+
 </mapper>
